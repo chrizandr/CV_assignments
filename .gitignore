@@ -12,6 +12,7 @@ env/
 build/
 develop-eggs/
 data/
+output/
 dist/
 downloads/
 eggs/

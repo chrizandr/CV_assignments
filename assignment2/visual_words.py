@@ -79,17 +79,18 @@ def train_visual_words(TRAIN_FOLDERS, TEST_FOLDERS, n_clusters):
     print("Creating histograms of words for train images")
     split_data, files = read_features(TRAIN_FOLDERS, split=True, return_files=True)
     histograms = create_word_histogram(model_name, split_data, n_clusters)
-    write_to_file(histograms, files, "train_word_histograms.csv")
+    write_to_file(histograms, files, "train_word_histograms" + str(n_clusters) + ".csv")
 
     print("Creating histograms of words for test images")
     split_data, files = read_features(TEST_FOLDERS, split=True, return_files=True)
     histograms = create_word_histogram(model_name, split_data, n_clusters)
-    write_to_file(histograms, files, "test_word_histograms.csv")
+    write_to_file(histograms, files, "test_word_histograms" + str(n_clusters) + ".csv")
 
     return True
 
 
 def write_to_file(histograms, files, filename):
+    """Write features to a file."""
     f = open(filename, "w")
     for i in range(histograms.shape[0]):
         f.write(",".join([str(x) for x in histograms[i]]))
@@ -98,8 +99,8 @@ def write_to_file(histograms, files, filename):
 
 
 if __name__ == "__main__":
-    TEST_FOLDERS = "/home/chris/cv/hw2_data/test_sift_features/"
-    TRAIN_FOLDERS = "/home/chris/cv/hw2_data/train_sift_features/"
-    N_WORDS = 100
+    TEST_FOLDERS = "/path/to/test/sift/features/folder/"
+    TRAIN_FOLDERS = "/path/to/train/sift/features/folder/"
+    N_WORDS = 150
 
     assert train_visual_words(TRAIN_FOLDERS, TEST_FOLDERS, N_WORDS)
